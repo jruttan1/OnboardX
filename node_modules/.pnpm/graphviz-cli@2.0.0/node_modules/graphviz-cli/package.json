@@ -1,0 +1,94 @@
+{
+  "name": "graphviz-cli",
+  "version": "2.0.0",
+  "description": "Command-line tool for generating graph images from Graphviz source scripts.",
+  "author": "Ferdinand Prantl <prantlf@gmail.com> (http://prantlf.tk/)",
+  "keywords": [
+    "graphviz",
+    "graph",
+    "dot"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prantlf/graphviz-cli.git"
+  },
+  "homepage": "https://github.com/prantlf/graphviz-cli#readme",
+  "bugs": "https://github.com/prantlf/graphviz-cli/issues",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.8"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "man"
+  ],
+  "bin": {
+    "graphviz": "bin/graphviz.cjs"
+  },
+  "type": "module",
+  "main": "lib/index.cjs",
+  "module": "lib/index.js",
+  "exports": {
+    "require": "./lib/index.cjs",
+    "import": "./lib/index.js"
+  },
+  "types": "lib/index.d.ts",
+  "man": [
+    "man/graphviz.1"
+  ],
+  "scripts": {
+    "prepare": "rollup -c",
+    "test:esm": "node test/test.js",
+    "test:ts": "tsc --noEmit test/types.ts",
+    "test:cli": "c8 --reporter=none ./bin/graphviz.cjs -? && c8 --reporter=none --no-clean ./bin/graphviz.cjs -V && mkdir -p test/actual && cat test/hello.dot | c8 --reporter=none --no-clean ./bin/graphviz.cjs > test/actual/hello.dot.dot && c8 --reporter=none --no-clean ./bin/graphviz.cjs -Tsvg -otest/actual/hello.dot.svg test/hello.dot && c8 --reporter=none --no-clean cp test/hello.dot test/actual/hello.dot && c8 --reporter=none --no-clean ./bin/graphviz.cjs -Tjson -O test/actual/hello.dot && rm test/actual/hello.dot && c8 --reporter=none --no-clean ./bin/graphviz.cjs -v -Tjson0 -otest/actual/hello.dot.json0 test/hello.dot && c8 --reporter=none --no-clean ./bin/graphviz.cjs -v -Tplain test/hello.dot > test/actual/hello.dot.plain && cat test/hello.dot | c8 --reporter=none --no-clean ./bin/graphviz.cjs -v -Tplain-ext -otest/actual/hello.dot.plain-ext && c8 --reporter=none --no-clean ./bin/graphviz.cjs -Kneato -Tps -otest/actual/hello.dot.ps test/hello.dot && c8 --reporter=none --no-clean ./bin/graphviz.cjs -y -Tps2 -otest/actual/hello.dot.ps2 test/hello.dot && c8 --reporter=none --no-clean ./bin/graphviz.cjs -n1 -Tpng -otest/actual/hello.dot.png test/hello.dot && cat test/hello.dot | c8 --reporter=none --no-clean ./bin/graphviz.cjs -v -Txdot > test/actual/hello.dot.xdot && cat test/hello.dot | c8 --reporter=none --no-clean ./bin/graphviz.cjs -v -Tcanon > test/actual/hello.dot.canon",
+    "test:err": "c8 --reporter=none --no-clean ./bin/graphviz.cjs -Kinvalid || c8 --reporter=none --no-clean ./bin/graphviz.cjs -v -Tinvalid || c8 --reporter=none --no-clean ./bin/graphviz.cjs -n2 || c8 --reporter=none --no-clean ./bin/graphviz.cjs -o || c8 --reporter=none --no-clean ./bin/graphviz.cjs -K || c8 --reporter=none --no-clean ./bin/graphviz.cjs -T || c8 --reporter=none --no-clean ./bin/graphviz.cjs -Ounexpected || c8 --reporter=none --no-clean ./bin/graphviz.cjs -v -X || true",
+    "test:cmp": "c8 --reporter=none --no-clean node test/test.cjs",
+    "test:cov": "c8 report && c8 check-coverage",
+    "test": "denolint && npm run test:esm && npm run test:ts && npm run test:cli && npm run test:err && npm run test:cmp && npm run test:cov"
+  },
+  "c8": {
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "branches": 100,
+    "functions": 100,
+    "lines": 100,
+    "statements": 100
+  },
+  "dependencies": {
+    "@aduh95/viz.js": "3.7.0"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "6.0.2",
+    "@semantic-release/git": "10.0.1",
+    "@types/node": "18.11.13",
+    "c8": "7.12.0",
+    "canvas": "2.10.2",
+    "denolint": "2.0.5",
+    "graphviz-cli": "link:",
+    "rollup": "3.7.2",
+    "rollup-plugin-cleanup": "3.2.1",
+    "rollup-plugin-re": "1.0.7",
+    "tehanu": "1.0.1",
+    "tehanu-repo-coco": "1.0.0",
+    "tehanu-teru": "1.0.0",
+    "typescript": "4.9.4"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      [
+        "@semantic-release/github",
+        {
+          "failComment": false
+        }
+      ],
+      "@semantic-release/git"
+    ]
+  }
+}

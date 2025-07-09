@@ -1,0 +1,82 @@
+{
+  "name": "@aduh95/viz.js",
+  "version": "3.7.0",
+  "description": "A hack to put Graphviz on the web.",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "browser": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    },
+    "./async": "./dist/render_async.cjs",
+    "./sync": "./dist/render_sync.cjs",
+    "./wasm": "./dist/render.wasm",
+    "./worker": {
+      "types": "./dist/worker.d.ts",
+      "node": "./dist/render.node.mjs",
+      "default": "./dist/render.browser.js"
+    }
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aduh95/viz.js.git"
+  },
+  "keywords": [
+    "graphviz",
+    "emscripten"
+  ],
+  "files": [
+    "dist/index.cjs",
+    "dist/index.mjs",
+    "dist/index.d.ts",
+    "dist/types.d.ts",
+    "dist/render.d.ts",
+    "dist/render.node.mjs",
+    "dist/render.browser.js",
+    "dist/render.wasm",
+    "dist/render_async.cjs",
+    "dist/render_async.d.ts",
+    "dist/render_sync.cjs",
+    "dist/render_sync.d.ts",
+    "dist/worker.d.ts",
+    "async/index.js",
+    "async/index.d.ts",
+    "sync/index.js",
+    "sync/index.d.ts",
+    "wasm",
+    "worker",
+    "worker.d.ts"
+  ],
+  "contributors": [
+    "Mike Daines <mdaines@fastmail.com>",
+    "Antoine du Hamel <duhamelantoine1995@gmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aduh95/viz.js/issues"
+  },
+  "homepage": "https://github.com/aduh95/viz.js",
+  "packageManager": "yarn@3.2.1",
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^8.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "mocha": "^10.0.0",
+    "prettier": "^2.0.4",
+    "puppeteer": "^15.0.0",
+    "rollup": "^2.4.0",
+    "semver": "^7.3.2",
+    "terser": "^5.2.1",
+    "typescript": "^4.0.2"
+  },
+  "resolutions": {
+    "@types/node": "patch:@types/node@npm:18.0.3#.yarn/patches/@types-node-npm-18.0.3-c2cbe1f26e.patch"
+  }
+}
