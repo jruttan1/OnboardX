@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "bin": { "onboardx": "bin/onboardx.js" },
   "files": ["dist", "bin", "templates"],
   "scripts": {

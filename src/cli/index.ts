@@ -1,5 +1,7 @@
+#!/usr/bin/env node
+
 import { Command } from 'commander';
-import { runAnalysis } from '../analysis/analyzer.ts';
+import { runAnalysis } from '../analysis/analyzer';
 
 const program = new Command();
 program

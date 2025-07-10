@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request: 
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Check out your code
+      - uses: actions/checkout@v4
+
+      # 2. Install Node & cache npm deps
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # 3. Install & verify
+      - run: npm ci
+
+      # 4. Lint
+      - run: npm run lint
+
+      # 5. Run your tests
+      - run: npm test
+
+      # 6. Compile to dist/
+      - run: npm run build
