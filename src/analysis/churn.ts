@@ -68,10 +68,7 @@ function shouldIncludeFile(file: string): boolean {
     
     // Include common source code file extensions
     const includeExtensions = [
-        '.ts', '.tsx', '.js', '.jsx', '.py', '.java', '.c', '.cpp', '.h', '.hpp',
-        '.cs', '.go', '.rs', '.rb', '.php', '.swift', '.kt', '.scala', '.clj',
-        '.vue', '.svelte', '.html', '.css', '.scss', '.sass', '.less',
-        '.md', '.json', '.yaml', '.yml', '.xml', '.toml', '.ini', '.cfg'
+        '.ts', '.tsx', '.js', '.jsx'
     ]
     
     return includeExtensions.some(ext => file.endsWith(ext))
