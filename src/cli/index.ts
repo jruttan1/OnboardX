@@ -19,7 +19,7 @@ program
 
 program.parse();
 
-// GitHub Actions command for doc update on commit"
+// GitHub Actions command for doc update on commit
 const exec = promisify(execCb)
 program
   .command('init')
@@ -47,7 +47,7 @@ jobs:
 `;
     await fs.promises.mkdir('.github/workflows', { recursive: true });
     await fs.promises.writeFile('.github/workflows/wayfinder.yml', workflow, 'utf8');
-    // stage, commit, push
+    // add, commit, push
     await exec('git add .github/workflows/wayfinder.yml');
     await exec('git commit -m "chore(ci): add Wayfinder auto-refresh workflow"');
     await exec('git push');
