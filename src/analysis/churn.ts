@@ -66,9 +66,22 @@ function shouldIncludeFile(file: string): boolean {
     
     if (excludeDirs.some(dir => file.includes(dir))) return false
     
+    // Skip test files
+    if (file.match(/\.test\.(ts|tsx|js|jsx)$/) || file.match(/\.spec\.(ts|tsx|js|jsx)$/)) {
+        return false
+    }
+    
+    // Skip other non-source files
+    if (file.endsWith('.d.ts') || file.endsWith('.json') || file.endsWith('.md')) {
+        return false
+    }
+    
     // Include common source code file extensions
     const includeExtensions = [
-        '.ts', '.tsx', '.js', '.jsx'
+        '.ts', '.tsx', '.js', '.jsx', '.py', '.java', '.c', '.cpp', '.h', '.hpp',
+        '.cs', '.go', '.rs', '.rb', '.php', '.swift', '.kt', '.scala', '.clj',
+        '.vue', '.svelte', '.html', '.css', '.scss', '.sass', '.less',
+        '.yaml', '.yml', '.xml', '.toml', '.ini', '.cfg'
     ]
     
     return includeExtensions.some(ext => file.endsWith(ext))
