@@ -13,8 +13,32 @@ program
   .description('Generate ONBOARD.md for any Git repo')
   .argument('[path]', 'target repo', '.')
   .option('-o, --out <file>', 'output file', 'ONBOARD.md')
+  .option('--show-graphs', 'display mermaid diagrams')
   .action(async (path, opts) => {
-    await runAnalysis({ repoRoot: path, output: opts.out });
+    const results = await runAnalysis({ repoRoot: path, output: opts.out });
+    
+    if (opts.showGraphs) {
+      console.log('\n' + '='.repeat(60))
+      console.log('📊 DEPENDENCY GRAPH')
+      console.log('='.repeat(60))
+      console.log('```mermaid')
+      console.log(results.mermaidGraphs.dependencyGraph)
+      console.log('```')
+      
+      console.log('\n' + '='.repeat(60))
+      console.log('⚠️  RISK ANALYSIS')
+      console.log('='.repeat(60))
+      console.log('```mermaid')
+      console.log(results.mermaidGraphs.riskAnalysis)
+      console.log('```')
+      
+      console.log('\n' + '='.repeat(60))
+      console.log('👥 OWNERSHIP MAP')
+      console.log('='.repeat(60))
+      console.log('```mermaid')
+      console.log(results.mermaidGraphs.ownershipMap)
+      console.log('```')
+    }
   });
 
 program.parse();
